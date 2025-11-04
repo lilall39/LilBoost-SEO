@@ -1,4 +1,5 @@
- <!DOCTYPE html>
+ 
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -15,8 +16,46 @@
   </nav>
 
   <section>
-    <p>Cette section affichera bientôt tes backlinks grâce à une API externe.</p>
+    <p>Entre l’adresse de ton site pour analyser les backlinks :</p>
+    <input type="text" id="site" placeholder="https://ton-site.fr" style="width:60%;">
+    <button onclick="analyserBacklinks()">Analyser</button>
+
+    <div id="resultats" style="margin-top:20px;"></div>
   </section>
+
+  <script>
+    async function analyserBacklinks() {
+      const site = document.getElementById('site').value.trim();
+      if (!site) {
+        document.getElementById('resultats').innerHTML = "<p>⚠️ Merci d’entrer une URL valide.</p>";
+        return;
+      }
+
+      document.getElementById('resultats').innerHTML = "<p>Analyse en cours...</p>";
+
+      try {
+        const response = await fetch(`/api/backlinks?site=${encodeURIComponent(site)}`);
+        const data = await response.json();
+
+        if (!data.success) {
+          document.getElementById('resultats').innerHTML = `<p>❌ Erreur : ${data.error}</p>`;
+          return;
+        }
+
+        const html = `
+          <h3>Résultats pour ${data.site}</h3>
+          <ul>
+            <li><strong>Nombre total de backlinks :</strong> ${data.backlinks}</li>
+            <li><strong>Nombre de domaines référents :</strong> ${data.referringDomains}</li>
+          </ul>
+          <p>${data.message}</p>
+        `;
+        document.getElementById('resultats').innerHTML = html;
+
+      } catch (error) {
+        document.getElementById('resultats').innerHTML = `<p>🚨 Erreur : ${error.message}</p>`;
+      }
+    }
+  </script>
 </body>
 </html>
-
