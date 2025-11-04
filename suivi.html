@@ -1,2 +1,38 @@
-<h2>Suivi Hebdo</h2>
-<p>Indique combien de fiches tu publies chaque semaine.</p>
+ <!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Suivi Hebdo – LilBoost SEO</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>📅 Suivi Hebdomadaire</h1>
+  <nav>
+    <a href="index.html">Accueil</a> |
+    <a href="analyse.html">Analyse Mots-Clés</a> |
+    <a href="suivi.html">Suivi Hebdo</a> |
+    <a href="backlinks.html">Backlinks</a>
+  </nav>
+
+  <section>
+    <label for="nb">Nombre de fiches publiées cette semaine :</label><br>
+    <input type="number" id="nb" placeholder="ex : 18">
+    <button onclick="verifier()">Vérifier</button>
+
+    <div id="message"></div>
+  </section>
+
+  <script>
+    function verifier() {
+      const n = parseInt(document.getElementById('nb').value);
+      let msg = "";
+      if (isNaN(n)) msg = "⚠️ Entrez un nombre valide.";
+      else if (n < 10) msg = "🟢 Bon rythme, continue tranquillement.";
+      else if (n <= 25) msg = "✅ Excellent rythme de publication !";
+      else msg = "🚨 Attention, trop de fiches cette semaine. Google pourrait te considérer comme spam.";
+      document.getElementById('message').innerHTML = `<p>${msg}</p>`;
+    }
+  </script>
+</body>
+</html>
+

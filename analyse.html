@@ -1,2 +1,53 @@
-<h2>Analyse Mots-Clés</h2>
-<p>Ici tu pourras coller ton texte pour détecter les répétitions.</p>
+ <!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Analyse Mots-Clés – LilBoost SEO</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🔍 Analyse des Mots-Clés</h1>
+  <nav>
+    <a href="index.html">Accueil</a> |
+    <a href="analyse.html">Analyse Mots-Clés</a> |
+    <a href="suivi.html">Suivi Hebdo</a> |
+    <a href="backlinks.html">Backlinks</a>
+  </nav>
+
+  <section>
+    <textarea id="texte" placeholder="Colle ici ton texte à analyser..."></textarea><br>
+    <button onclick="analyserTexte()">Analyser</button>
+
+    <h3>Résultats :</h3>
+    <div id="resultats"></div>
+  </section>
+
+  <script>
+    function analyserTexte() {
+      const texte = document.getElementById('texte').value.toLowerCase();
+      const mots = texte.match(/\b[\wàâçéèêëîïôûùüÿñæœ]+\b/g);
+
+      if (!mots) {
+        document.getElementById('resultats').innerHTML = "<p>Aucun mot détecté.</p>";
+        return;
+      }
+
+      const compteur = {};
+      mots.forEach(m => compteur[m] = (compteur[m] || 0) + 1);
+
+      // Trier les mots par fréquence
+      const tri = Object.entries(compteur).sort((a,b) => b[1]-a[1]);
+
+      let html = "<table><tr><th>Mot</th><th>Fréquence</th><th>Statut</th></tr>";
+      tri.forEach(([mot, freq]) => {
+        const statut = freq >= 5 ? "⚠️ Trop fréquent" : "✅ OK";
+        html += `<tr><td>${mot}</td><td>${freq}</td><td>${statut}</td></tr>`;
+      });
+      html += "</table>";
+
+      document.getElementById('resultats').innerHTML = html;
+    }
+  </script>
+</body>
+</html>
+

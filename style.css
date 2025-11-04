@@ -1,19 +1,65 @@
-body {
+ body {
   font-family: Arial, sans-serif;
   margin: 40px;
-  background: #f4f4f9;
+  background: #f8f9fb;
+  color: #222;
 }
 
 h1 {
-  color: #4CAF50;
+  color: #2e8b57;
+}
+
+nav {
+  margin-bottom: 20px;
 }
 
 nav a {
   margin: 0 10px;
-  color: #333;
+  color: #444;
   text-decoration: none;
+  font-weight: bold;
 }
 
 nav a:hover {
-  text-decoration: underline;
+  color: #2e8b57;
 }
+
+textarea {
+  width: 80%;
+  height: 120px;
+  margin-top: 10px;
+}
+
+button {
+  background: #2e8b57;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background: #256b44;
+}
+
+table {
+  border-collapse: collapse;
+  width: 80%;
+  margin-top: 15px;
+}
+
+table, th, td {
+  border: 1px solid #ccc;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
